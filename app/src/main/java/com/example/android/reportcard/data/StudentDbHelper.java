@@ -12,7 +12,7 @@ public class StudentDbHelper extends SQLiteOpenHelper {
 
 
     /** Name of the database file */
-    private static final String DATABASE_NAME = "shelter.db";
+    private static final String DATABASE_NAME = "school.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.
@@ -36,10 +36,10 @@ public class StudentDbHelper extends SQLiteOpenHelper {
         // Create a String that contains the SQL statement to create the pets table
         String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " +  StudentContract.StudentEntry.TABLE_NAME + " ("
                 +  StudentContract.StudentEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +  StudentContract.StudentEntry.COLUMN_PET_NAME + " TEXT NOT NULL, "
-                +  StudentContract.StudentEntry.COLUMN_PET_BREED + " TEXT, "
-                + StudentContract.StudentEntry.COLUMN_PET_GENDER + " INTEGER NOT NULL, "
-                +  StudentContract.StudentEntry.COLUMN_PET_WEIGHT + " INTEGER NOT NULL DEFAULT 0);";
+                +  StudentContract.StudentEntry.COLUMN_STUDENT_NAME + " TEXT NOT NULL, "
+                +  StudentContract.StudentEntry.COLUMN_STUDENT_GRADE + " TEXT, "
+                + StudentContract.StudentEntry.COLUMN_STUDENT_GENDER + " INTEGER NOT NULL, "
+                +  StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE + " INTEGER NOT NULL DEFAULT 0);";
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_PETS_TABLE);

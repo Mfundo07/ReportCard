@@ -21,7 +21,7 @@ import android.widget.ListView;
 import com.example.android.reportcard.data.StudentContract.StudentEntry;
 import com.example.android.reportcard.data.StudentCursorAdapter;
 
-import static com.example.android.reportcard.data.StudentContract.StudentEntry.COLUMN_PET_NAME;
+import static com.example.android.reportcard.data.StudentContract.StudentEntry.COLUMN_STUDENT_NAME;
 
 /**
  * Displays list of pets that were entered and stored in the app.
@@ -30,7 +30,7 @@ public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
     /** Identifier for the pet data loader */
-    private static final int PET_LOADER = 0;
+    private static final int STUDENT_LOADER = 0;
 
     /** Adapter for the ListView */
     StudentCursorAdapter mCursorAdapter;
@@ -85,7 +85,7 @@ public class CatalogActivity extends AppCompatActivity implements
         });
 
         // Kick off the loader
-        getLoaderManager().initLoader(PET_LOADER, null, this);
+        getLoaderManager().initLoader(STUDENT_LOADER, null, this);
     }
 
     /**
@@ -95,10 +95,10 @@ public class CatalogActivity extends AppCompatActivity implements
         // Create a ContentValues object where column names are the keys,
         // and Toto's pet attributes are the values.
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PET_NAME, "Toto");
-        values.put(StudentEntry.COLUMN_PET_BREED, "Terrier");
-        values.put(StudentEntry.COLUMN_PET_GENDER, StudentEntry.GENDER_MALE);
-        values.put(StudentEntry.COLUMN_PET_WEIGHT, 7);
+        values.put(COLUMN_STUDENT_NAME, "Toto");
+        values.put(StudentEntry.COLUMN_STUDENT_GRADE, "4");
+        values.put(StudentEntry.COLUMN_STUDENT_GENDER, StudentEntry.GENDER_MALE);
+        values.put(StudentEntry.COLUMN_STUDENT_PERCENTAGE, 7);
 
         // Insert a new row for Toto into the provider using the ContentResolver.
         // Use the {@link PetEntry#CONTENT_URI} to indicate that we want to insert
@@ -144,8 +144,8 @@ public class CatalogActivity extends AppCompatActivity implements
         // Define a projection that specifies the columns from the table we care about.
         String[] projection = {
                 StudentEntry._ID,
-                StudentEntry.COLUMN_PET_NAME,
-                StudentEntry.COLUMN_PET_BREED };
+                COLUMN_STUDENT_NAME,
+                StudentEntry.COLUMN_STUDENT_PERCENTAGE };
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context

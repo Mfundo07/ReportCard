@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- * API Contract for the Pets app.
+ * API Contract for the Students app.
  */
 public final class StudentContract {
 
@@ -37,27 +37,27 @@ public final class StudentContract {
 
     /**
      * Inner class that defines constant values for the pets database table.
-     * Each entry in the table represents a single pet.
+     * Each entry in the table represents a single students.
      */
     public static final class StudentEntry implements BaseColumns {
         /**
-         * The MIME type of the {@link #CONTENT_URI} for a list of pets.
+         * The MIME type of the {@link #CONTENT_URI} for a list of students.
          */
         public static final String CONTENT_LIST_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_STUDENTS;
 
         /**
-         * The MIME type of the {@link #CONTENT_URI} for a single pet.
+         * The MIME type of the {@link #CONTENT_URI} for a single students.
          */
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_STUDENTS;
 
 
-        /** The content URI to access the pet data in the provider */
+        /** The content URI to access the student data in the provider */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_STUDENTS);
 
-        /** Name of database table for pets */
-        public final static String TABLE_NAME = "pets";
+        /** Name of database table for students */
+        public final static String TABLE_NAME = "students";
 
         /**
          * Unique ID number for the pet (only for use in the database table).
@@ -67,38 +67,38 @@ public final class StudentContract {
         public final static String _ID = BaseColumns._ID;
 
         /**
-         * Name of the pet.
+         * Name of the student.
          *
          * Type: TEXT
          */
-        public final static String COLUMN_PET_NAME ="name";
+        public final static String COLUMN_STUDENT_NAME ="name";
 
         /**
-         * Breed of the pet.
+         * Grade of the student.
          *
          * Type: TEXT
          */
-        public final static String COLUMN_PET_BREED = "breed";
+        public final static String COLUMN_STUDENT_GRADE = "grade";
 
         /**
-         * Gender of the pet.
+         * Gender of the student.
          *
          * The only possible values are {@link #GENDER_UNKNOWN}, {@link #GENDER_MALE},
          * or {@link #GENDER_FEMALE}.
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_PET_GENDER = "gender";
+        public final static String COLUMN_STUDENT_GENDER = "gender";
 
         /**
-         * Weight of the pet.
+         * Percentage of the student.
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_PET_WEIGHT = "weight";
+        public final static String COLUMN_STUDENT_PERCENTAGE = "percentage";
 
         /**
-         * Possible values for the gender of the pet.
+         * Possible values for the gender of the student.
          */
         public static final int GENDER_UNKNOWN = 0;
         public static final int GENDER_MALE = 1;

@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.example.android.reportcard.data.StudentContract.StudentEntry;
 
-import static com.example.android.reportcard.data.StudentContract.StudentEntry.COLUMN_PET_NAME;
+import static com.example.android.reportcard.data.StudentContract.StudentEntry.COLUMN_STUDENT_NAME;
 import static com.example.android.reportcard.data.StudentContract.StudentEntry.GENDER_UNKNOWN;
 
 /**
@@ -181,16 +181,16 @@ public class EditorActivity extends AppCompatActivity implements
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PET_NAME, nameString);
-        values.put(StudentEntry.COLUMN_PET_BREED, breedString);
-        values.put(StudentEntry.COLUMN_PET_GENDER, mGender);
+        values.put(COLUMN_STUDENT_NAME, nameString);
+        values.put(StudentEntry.COLUMN_STUDENT_GRADE, breedString);
+        values.put(StudentEntry.COLUMN_STUDENT_GENDER, mGender);
         // If the weight is not provided by the user, don't try to parse the string into an
         // integer value. Use 0 by default.
         int weight = 0;
         if (!TextUtils.isEmpty(weightString)) {
             weight = Integer.parseInt(weightString);
         }
-        values.put(StudentEntry.COLUMN_PET_WEIGHT, weight);
+        values.put(StudentEntry.COLUMN_STUDENT_PERCENTAGE, weight);
 
         // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not
         if (mCurrentPetUri == null) {
@@ -327,10 +327,10 @@ public class EditorActivity extends AppCompatActivity implements
         // all columns from the pet table
         String[] projection = {
                 StudentEntry._ID,
-                StudentEntry.COLUMN_PET_NAME,
-                StudentEntry.COLUMN_PET_BREED,
-                StudentEntry.COLUMN_PET_GENDER,
-                StudentEntry.COLUMN_PET_WEIGHT };
+                StudentEntry.COLUMN_STUDENT_NAME,
+                StudentEntry.COLUMN_STUDENT_GRADE,
+                StudentEntry.COLUMN_STUDENT_GENDER,
+                StudentEntry.COLUMN_STUDENT_PERCENTAGE };
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -352,14 +352,14 @@ public class EditorActivity extends AppCompatActivity implements
         // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
             // Find the columns of pet attributes that we're interested in
-            int nameColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_PET_NAME);
-            int breedColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_PET_BREED);
-            int genderColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_PET_GENDER);
-            int weightColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_PET_WEIGHT);
+            int nameColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_NAME);
+            int gradeColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_GRADE);
+            int genderColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_GENDER);
+            int weightColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_PERCENTAGE);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
-            String breed = cursor.getString(breedColumnIndex);
+            String breed = cursor.getString(gradeColumnIndex);
             int gender = cursor.getInt(genderColumnIndex);
             int weight = cursor.getInt(weightColumnIndex);
 

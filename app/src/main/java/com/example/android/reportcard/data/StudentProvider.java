@@ -126,19 +126,19 @@ public class StudentProvider extends ContentProvider {
      */
     private Uri insertPet(Uri uri, ContentValues values) {
         // Check that the name is not null
-        String name = values.getAsString(StudentContract.StudentEntry.COLUMN_PET_NAME);
+        String name = values.getAsString(StudentContract.StudentEntry.COLUMN_STUDENT_NAME);
         if (name == null) {
-            throw new IllegalArgumentException("Pet requires a name");
+            throw new IllegalArgumentException("Student requires a name");
         }
 
         // Check that the gender is valid
-        Integer gender = values.getAsInteger(StudentContract.StudentEntry.COLUMN_PET_GENDER);
+        Integer gender = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_GENDER);
         if (gender == null || !StudentContract.StudentEntry.isValidGender(gender)) {
             throw new IllegalArgumentException("Student requires valid gender");
         }
 
         // If the weight is provided, check that it's greater than or equal to 0 kg
-        Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_PET_WEIGHT);
+        Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE);
         if (weight != null && weight < 0) {
             throw new IllegalArgumentException("Student requires valid weight");
         }
@@ -190,29 +190,29 @@ public class StudentProvider extends ContentProvider {
     private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         // If the {@link StudentEntry#COLUMN_PET_NAME} key is present,
         // check that the name value is not null.
-        if (values.containsKey(StudentContract.StudentEntry.COLUMN_PET_NAME)) {
-            String name = values.getAsString(StudentContract.StudentEntry.COLUMN_PET_NAME);
+        if (values.containsKey(StudentContract.StudentEntry.COLUMN_STUDENT_NAME)) {
+            String name = values.getAsString(StudentContract.StudentEntry.COLUMN_STUDENT_NAME);
             if (name == null) {
-                throw new IllegalArgumentException("Pet requires a name");
+                throw new IllegalArgumentException("STUDENT requires a name");
             }
         }
 
-        // If the {@link StudentEntry#COLUMN_PET_GENDER} key is present,
+        // If the {@link StudentEntry#COLUMN_STUDENT_GENDER} key is present,
         // check that the gender value is valid.
-        if (values.containsKey(StudentContract.StudentEntry.COLUMN_PET_GENDER)) {
-            Integer gender = values.getAsInteger(StudentContract.StudentEntry.COLUMN_PET_GENDER);
+        if (values.containsKey(StudentContract.StudentEntry.COLUMN_STUDENT_GENDER)) {
+            Integer gender = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_GENDER);
             if (gender == null || !StudentContract.StudentEntry.isValidGender(gender)) {
-                throw new IllegalArgumentException("Pet requires valid gender");
+                throw new IllegalArgumentException("STUDENT requires valid gender");
             }
         }
 
-        // If the {@link StudentEntry#COLUMN_PET_WEIGHT} key is present,
+        // If the {@link StudentEntry#COLUMN_STUDENT_PERCENTAGE} key is present,
         // check that the weight value is valid.
-        if (values.containsKey(StudentContract.StudentEntry.COLUMN_PET_WEIGHT)) {
-            // Check that the weight is greater than or equal to 0 kg
-            Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_PET_WEIGHT);
+        if (values.containsKey(StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE)) {
+            // Check that the weight is greater than or equal to 0 %
+            Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE);
             if (weight != null && weight < 0) {
-                throw new IllegalArgumentException("Pet requires valid weight");
+                throw new IllegalArgumentException("STUDENT REPORT requires valid percentage");
             }
         }
 
