@@ -34,7 +34,7 @@
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
-            <!-- Breed field -->
+            <!-- Grade field -->
             <EditText
                 android:id="@+id/edit_pet_breed"
                 android:hint="@string/hint_student_grade"
@@ -52,8 +52,9 @@
 
         <!-- Label -->
         <TextView
-            android:text="@string/category_gender"
-            style="@style/CategoryStyle" />
+            android:id="@+id/textView5"
+            style="@style/CategoryStyle"
+            android:text="@string/category_gender" />
 
         <!-- Input field -->
         <LinearLayout
@@ -72,37 +73,133 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Measurement category -->
     <LinearLayout
-        android:id="@+id/container_measurement"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="@string/category_percentage" />
-
-        <!-- Input fields -->
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:paddingLeft="4dp">
-
-            <!-- Percentage field -->
-            <EditText
-                android:id="@+id/edit_pet_weight"
-                style="@style/EditorFieldStyle"
-                android:hint="@string/hint_student_percentage"
-                android:inputType="number" />
-
-            <!-- Units for percentage (%) -->
             <TextView
-                android:id="@+id/label_weight_units"
-                style="@style/EditorUnitsStyle"
-                android:text="@string/unit_student_percentage" />
-        </RelativeLayout>
+                android:id="@+id/textView2"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/subject_categories" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mathematics" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/home_language"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/first_add_language" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/life_skills"
+                android:layout_weight="1"
+               />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hss_ems"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ns_tech"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+
+
+        <!-- Measurement category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/textView4"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category_percentage"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/math_perc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint_mathematics_perc"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/hl_perc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_hl_perc"
+                android:textSize="14sp"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/fal_perc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint_fal_perc"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/life_perc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint_life_skills_perc"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/hss_perc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_hss_ems_perc"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+            <EditText
+                android:id="@+id/ns_perc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_ns_tech_perc"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+
+
