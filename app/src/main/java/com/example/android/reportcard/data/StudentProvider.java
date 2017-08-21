@@ -137,10 +137,10 @@ public class StudentProvider extends ContentProvider {
             throw new IllegalArgumentException("Student requires valid gender");
         }
 
-        // If the weight is provided, check that it's greater than or equal to 0 kg
-        Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE);
-        if (weight != null && weight < 0) {
-            throw new IllegalArgumentException("Student requires valid weight");
+        // If the grade is provided, check that it's greater than or equal to 0 kg
+        Integer grade = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_GRADE);
+        if (grade != null && grade < 0) {
+            throw new IllegalArgumentException("Student requires valid grade");
         }
 
         // No need to check the breed, any value is valid (including null).
@@ -206,11 +206,11 @@ public class StudentProvider extends ContentProvider {
             }
         }
 
-        // If the {@link StudentEntry#COLUMN_STUDENT_PERCENTAGE} key is present,
+        // If the {@link StudentEntry#COLUMN_STUDENT_GRADE} key is present,
         // check that the weight value is valid.
-        if (values.containsKey(StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE)) {
+        if (values.containsKey(StudentContract.StudentEntry.COLUMN_STUDENT_GRADE)) {
             // Check that the weight is greater than or equal to 0 %
-            Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE);
+            Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_GRADE);
             if (weight != null && weight < 0) {
                 throw new IllegalArgumentException("STUDENT REPORT requires valid percentage");
             }
