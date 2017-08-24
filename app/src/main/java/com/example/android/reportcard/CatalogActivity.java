@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.reportcard.data.StudentContract.StudentEntry;
-import com.example.android.reportcard.data.StudentCursorAdapter;
 
 import static com.example.android.reportcard.data.StudentContract.StudentEntry.COLUMN_STUDENT_NAME;
 
@@ -50,8 +49,12 @@ public class CatalogActivity extends AppCompatActivity implements
             }
         });
 
+
+
         // Find the ListView which will be populated with the pet data
         ListView petListView = (ListView) findViewById(R.id.list);
+
+
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
@@ -84,6 +87,8 @@ public class CatalogActivity extends AppCompatActivity implements
             }
         });
 
+
+
         // Kick off the loader
         getLoaderManager().initLoader(STUDENT_LOADER, null, this);
     }
@@ -98,7 +103,14 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(COLUMN_STUDENT_NAME, "Toto");
         values.put(StudentEntry.COLUMN_STUDENT_GRADE, "4");
         values.put(StudentEntry.COLUMN_STUDENT_GENDER, StudentEntry.GENDER_MALE);
-        values.put(StudentEntry.COLUMN_STUDENT_PERCENTAGE, 7);
+        values.put(StudentEntry.COLUMN_SUBJECT_MATHEMATICS, 70);
+        values.put(StudentEntry.COLUMN_SUBJECT_HOME_LANGUAGE, 70);
+        values.put(StudentEntry.COLUMN_SUBJECT_FIRST_ADD_LANG, 70);
+        values.put(StudentEntry.COLUMN_SUBJECT_NS_AND_TECH, 70);
+        values.put(StudentEntry.COLUMN_SUBJECT_HSS_AND_EMS, 70);
+        values.put(StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS, 70);
+
+
 
         // Insert a new row for Toto into the provider using the ContentResolver.
         // Use the {@link PetEntry#CONTENT_URI} to indicate that we want to insert
@@ -112,7 +124,7 @@ public class CatalogActivity extends AppCompatActivity implements
      */
     private void deleteAllPets() {
         int rowsDeleted = getContentResolver().delete(StudentEntry.CONTENT_URI, null, null);
-        Log.v("CatalogActivity", rowsDeleted + " rows deleted from pet database");
+        Log.v("CatalogActivity", rowsDeleted + " rows deleted from student database");
     }
 
     @Override
@@ -145,7 +157,13 @@ public class CatalogActivity extends AppCompatActivity implements
         String[] projection = {
                 StudentEntry._ID,
                 COLUMN_STUDENT_NAME,
-                StudentEntry.COLUMN_STUDENT_PERCENTAGE };
+                StudentEntry.COLUMN_STUDENT_GRADE,
+        StudentEntry.COLUMN_SUBJECT_MATHEMATICS,
+        StudentEntry.COLUMN_SUBJECT_HOME_LANGUAGE,
+        StudentEntry.COLUMN_SUBJECT_FIRST_ADD_LANG,
+        StudentEntry.COLUMN_SUBJECT_NS_AND_TECH,
+        StudentEntry.COLUMN_SUBJECT_HSS_AND_EMS,
+        StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -167,4 +185,7 @@ public class CatalogActivity extends AppCompatActivity implements
         // Callback called when the data needs to be deleted
         mCursorAdapter.swapCursor(null);
     }
+
+
+
 }
