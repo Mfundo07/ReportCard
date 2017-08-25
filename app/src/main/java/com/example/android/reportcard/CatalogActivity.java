@@ -111,7 +111,6 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS, 70);
 
 
-
         // Insert a new row for Toto into the provider using the ContentResolver.
         // Use the {@link PetEntry#CONTENT_URI} to indicate that we want to insert
         // into the pets database table.

@@ -91,11 +91,21 @@ public final class StudentContract {
         public final static String COLUMN_STUDENT_GENDER = "gender";
 
         /**
-         * Percentage of the student.
+         * Percentages of the student.
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_STUDENT_PERCENTAGE = "percentage";
+
+        public final static String COLUMN_SUBJECT_MATHEMATICS = "mathematics";
+        public final static String COLUMN_SUBJECT_LIFE_SKILLS = "life_skills";
+        public final static String COLUMN_SUBJECT_HOME_LANGUAGE = "home_language";
+        public final static String COLUMN_SUBJECT_FIRST_ADD_LANG = "first_add_language";
+        public final static String COLUMN_SUBJECT_NS_AND_TECH = "science_and_technology";
+        public final static String COLUMN_SUBJECT_HSS_AND_EMS = "hss_and_ems";
+
+
+
+
 
         /**
          * Possible values for the gender of the student.
@@ -111,6 +121,8 @@ public final class StudentContract {
             return false;
         }
     }
+
+
 
 
 

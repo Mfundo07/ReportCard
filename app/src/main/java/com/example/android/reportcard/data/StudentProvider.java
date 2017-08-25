@@ -73,14 +73,14 @@ public class StudentProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case STUDENTS:
-                // For the PETS code, query the pets table directly with the given
+                // For the STUDENTS code, query the student table directly with the given
                 // projection, selection, selection arguments, and sort order. The cursor
                 // could contain multiple rows of the pets table.
                 cursor = database.query(StudentContract.StudentEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
             case STUDENT_ID:
-                // For the PET_ID code, extract out the ID from the URI.
+                // For the STUDENT_ID code, extract out the ID from the URI.
                 // For an example URI such as "content://com.example.android.pets/pets/3",
                 // the selection will be "_id=?" and the selection argument will be a
                 // String array containing the actual ID of 3 in this case.
@@ -114,7 +114,7 @@ public class StudentProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case STUDENTS:
-                return insertPet(uri, contentValues);
+                return insertStudent(uri, contentValues);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
@@ -124,7 +124,7 @@ public class StudentProvider extends ContentProvider {
      * Insert a pet into the database with the given content values. Return the new content URI
      * for that specific row in the database.
      */
-    private Uri insertPet(Uri uri, ContentValues values) {
+    private Uri insertStudent(Uri uri, ContentValues values) {
         // Check that the name is not null
         String name = values.getAsString(StudentContract.StudentEntry.COLUMN_STUDENT_NAME);
         if (name == null) {
@@ -142,13 +142,17 @@ public class StudentProvider extends ContentProvider {
         if (grade != null && grade < 0) {
             throw new IllegalArgumentException("Student requires valid grade");
         }
+        Integer maths = values.getAsInteger(StudentContract.StudentEntry.COLUMN_SUBJECT_MATHEMATICS);
+        if (maths != null && maths < 0) {
+            throw new IllegalArgumentException("Student requires valid maths percentage");
+        }
 
-        // No need to check the breed, any value is valid (including null).
+        // No need to check the grade, any value is valid (including null).
 
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        // Insert the new pet with the given values
+        // Insert the new student with the given values
         long id = database.insert(StudentContract.StudentEntry.TABLE_NAME, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
@@ -169,14 +173,14 @@ public class StudentProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case STUDENTS:
-                return updatePet(uri, contentValues, selection, selectionArgs);
+                return updateStudent(uri, contentValues, selection, selectionArgs);
             case STUDENT_ID:
                 // For the PET_ID code, extract out the ID from the URI,
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
                 selection = StudentContract.StudentEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                return updatePet(uri, contentValues, selection, selectionArgs);
+                return updateStudent(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
@@ -187,7 +191,7 @@ public class StudentProvider extends ContentProvider {
      * specified in the selection and selection arguments (which could be 0 or 1 or more pets).
      * Return the number of rows that were successfully updated.
      */
-    private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    private int updateStudent(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         // If the {@link StudentEntry#COLUMN_PET_NAME} key is present,
         // check that the name value is not null.
         if (values.containsKey(StudentContract.StudentEntry.COLUMN_STUDENT_NAME)) {
@@ -212,7 +216,14 @@ public class StudentProvider extends ContentProvider {
             // Check that the weight is greater than or equal to 0 %
             Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_STUDENT_GRADE);
             if (weight != null && weight < 0) {
-                throw new IllegalArgumentException("STUDENT REPORT requires valid percentage");
+                throw new IllegalArgumentException("STUDENT REPORT requires valid grade");
+            }
+        }
+        if (values.containsKey(StudentContract.StudentEntry.COLUMN_SUBJECT_MATHEMATICS)) {
+            // Check that the weight is greater than or equal to 0 %
+            Integer weight = values.getAsInteger(StudentContract.StudentEntry.COLUMN_SUBJECT_MATHEMATICS);
+            if (weight != null && weight < 0) {
+                throw new IllegalArgumentException("STUDENT REPORT requires valid Mathematics percentage");
             }
         }
 

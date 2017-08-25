@@ -33,16 +33,21 @@ public class StudentDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create a String that contains the SQL statement to create the pets table
-        String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " +  StudentContract.StudentEntry.TABLE_NAME + " ("
+        // Create a String that contains the SQL statement to create the students table
+        String SQL_CREATE_STUDENTS_TABLE =  "CREATE TABLE " +  StudentContract.StudentEntry.TABLE_NAME + " ("
                 +  StudentContract.StudentEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 +  StudentContract.StudentEntry.COLUMN_STUDENT_NAME + " TEXT NOT NULL, "
                 +  StudentContract.StudentEntry.COLUMN_STUDENT_GRADE + " TEXT, "
                 + StudentContract.StudentEntry.COLUMN_STUDENT_GENDER + " INTEGER NOT NULL, "
-                +  StudentContract.StudentEntry.COLUMN_STUDENT_PERCENTAGE + " INTEGER NOT NULL DEFAULT 0);";
+                +  StudentContract.StudentEntry.COLUMN_SUBJECT_MATHEMATICS + " INTEGER NOT NULL DEFAULT 0, "
+                +  StudentContract.StudentEntry.COLUMN_SUBJECT_HOME_LANGUAGE + " INTEGER NOT NULL DEFAULT 0, "
+                +  StudentContract.StudentEntry.COLUMN_SUBJECT_FIRST_ADD_LANG + " INTEGER NOT NULL DEFAULT 0, "
+                +  StudentContract.StudentEntry.COLUMN_SUBJECT_NS_AND_TECH + " INTEGER NOT NULL DEFAULT 0, "
+                +  StudentContract.StudentEntry.COLUMN_SUBJECT_HSS_AND_EMS + " INTEGER NOT NULL DEFAULT 0, "
+                +  StudentContract.StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS + " INTEGER NOT NULL DEFAULT 0);";
 
         // Execute the SQL statement
-        db.execSQL(SQL_CREATE_PETS_TABLE);
+        db.execSQL(SQL_CREATE_STUDENTS_TABLE);
     }
 
     /**

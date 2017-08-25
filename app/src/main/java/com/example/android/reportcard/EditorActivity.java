@@ -21,12 +21,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.reportcard.data.StudentContract.StudentEntry;
 
 import static com.example.android.reportcard.data.StudentContract.StudentEntry.COLUMN_STUDENT_NAME;
 import static com.example.android.reportcard.data.StudentContract.StudentEntry.GENDER_UNKNOWN;
+import static java.lang.Integer.parseInt;
 
 /**
  * Allows user to create a new pet or edit an existing one.
@@ -44,10 +46,16 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mNameEditText;
 
     /** EditText field to enter the pet's breed */
-    private EditText mBreedEditText;
+    private EditText mGradeEditText;
 
     /** EditText field to enter the pet's weight */
-    private EditText mWeightEditText;
+    private EditText mHssEditText;
+    private EditText mHlEditText;
+    private EditText mFalEditText;
+    private EditText mLifeSkillsEditText;
+    private EditText mNsEditText;
+    private EditText mMathEditText;
+    private TextView mGradeAverage;
 
     /** EditText field to enter the pet's gender */
     private Spinner mGenderSpinner;
@@ -60,7 +68,7 @@ public class EditorActivity extends AppCompatActivity implements
     private int mGender = GENDER_UNKNOWN;
 
     /** Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
-    private boolean mPetHasChanged = false;
+    private boolean mStudentHasChanged = false;
 
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
@@ -69,7 +77,7 @@ public class EditorActivity extends AppCompatActivity implements
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            mPetHasChanged = true;
+            mStudentHasChanged = true;
             return false;
         }
     };
@@ -104,16 +112,30 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Find all relevant views that we will need to read user input from
         mNameEditText = (EditText) findViewById(R.id.edit_pet_name);
-        mBreedEditText = (EditText) findViewById(R.id.edit_pet_breed);
-        mWeightEditText = (EditText) findViewById(R.id.edit_pet_weight);
+        mGradeEditText = (EditText) findViewById(R.id.edit_pet_breed);
+        mMathEditText = (EditText) findViewById(R.id.math_perc);
+        mHlEditText = (EditText) findViewById(R.id.hl_perc);
+        mFalEditText = (EditText) findViewById(R.id.fal_perc);
+        mHssEditText = (EditText) findViewById(R.id.hss_perc);
+        mNsEditText = (EditText) findViewById(R.id.ns_perc);
+        mLifeSkillsEditText = (EditText) findViewById(R.id.life_perc);
         mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
+        mGradeAverage = (TextView) findViewById(R.id.grade_average);
+
+
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
         mNameEditText.setOnTouchListener(mTouchListener);
-        mBreedEditText.setOnTouchListener(mTouchListener);
-        mWeightEditText.setOnTouchListener(mTouchListener);
+        mGradeEditText.setOnTouchListener(mTouchListener);
+        mMathEditText.setOnTouchListener(mTouchListener);
+        mHlEditText.setOnTouchListener(mTouchListener);
+        mFalEditText.setOnTouchListener(mTouchListener);
+        mHssEditText.setOnTouchListener(mTouchListener);
+        mLifeSkillsEditText.setOnTouchListener(mTouchListener);
+        mNsEditText.setOnTouchListener(mTouchListener);
+        mMathEditText.setOnTouchListener(mTouchListener);
         mGenderSpinner.setOnTouchListener(mTouchListener);
 
         setupSpinner();
@@ -165,15 +187,31 @@ public class EditorActivity extends AppCompatActivity implements
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
-        String breedString = mBreedEditText.getText().toString().trim();
-        String weightString = mWeightEditText.getText().toString().trim();
+        String gradeString = mGradeEditText.getText().toString().trim();
+        String mathString = mMathEditText.getText().toString().trim();
+        String hlString = mHlEditText.getText().toString().trim();
+        String falString = mFalEditText.getText().toString().trim();
+        String nsString = mNsEditText.getText().toString().trim();
+        String lifeSkillsString = mLifeSkillsEditText.getText().toString().trim();
+        String hssString = mHssEditText.getText().toString().trim();
+        String gradePointAverageString = mGradeAverage.getText().toString();
+
 
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentPetUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(breedString) &&
-                TextUtils.isEmpty(weightString) && mGender == StudentEntry.GENDER_UNKNOWN) {
-            // Since no fields were modified, we can return early without creating a new pet.
+                TextUtils.isEmpty(nameString) &&
+                TextUtils.isEmpty(gradeString) &&
+                TextUtils.isEmpty(mathString) &&
+                TextUtils.isEmpty(hlString) &&
+                TextUtils.isEmpty(gradeString) &&
+                TextUtils.isEmpty(falString) &&
+                TextUtils.isEmpty(nsString) &&
+                TextUtils.isEmpty(lifeSkillsString) &&
+                TextUtils.isEmpty(hssString) &&
+                TextUtils.isEmpty(gradePointAverageString)&&
+                mGender == StudentEntry.GENDER_UNKNOWN) {
+            // Since no fields were modified, we can return early without creating a new student.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
@@ -182,15 +220,58 @@ public class EditorActivity extends AppCompatActivity implements
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(COLUMN_STUDENT_NAME, nameString);
-        values.put(StudentEntry.COLUMN_STUDENT_GRADE, breedString);
+        values.put(StudentEntry.COLUMN_STUDENT_GRADE, gradeString);
         values.put(StudentEntry.COLUMN_STUDENT_GENDER, mGender);
+        values.put(StudentEntry.COLUMN_SUBJECT_HOME_LANGUAGE,hlString);
+        values.put(StudentEntry.COLUMN_SUBJECT_FIRST_ADD_LANG,falString);
+        values.put(StudentEntry.COLUMN_SUBJECT_MATHEMATICS,mathString);
+        values.put(StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS,lifeSkillsString);
+        values.put(StudentEntry.COLUMN_SUBJECT_HSS_AND_EMS,hssString);
+        values.put(StudentEntry.COLUMN_SUBJECT_NS_AND_TECH,nsString);
+
         // If the weight is not provided by the user, don't try to parse the string into an
         // integer value. Use 0 by default.
-        int weight = 0;
-        if (!TextUtils.isEmpty(weightString)) {
-            weight = Integer.parseInt(weightString);
+        int maths = 0;
+        if (!TextUtils.isEmpty(mathString)) {
+            maths = parseInt(mathString);
         }
-        values.put(StudentEntry.COLUMN_STUDENT_PERCENTAGE, weight);
+        values.put(StudentEntry.COLUMN_SUBJECT_MATHEMATICS, maths);
+
+
+        int homeLang = 0;
+        if (!TextUtils.isEmpty(hlString)) {
+            homeLang = parseInt(hlString);
+        }
+        values.put(StudentEntry.COLUMN_SUBJECT_HOME_LANGUAGE, homeLang);
+
+        int falLang = 0;
+        if (!TextUtils.isEmpty(falString)) {
+            falLang = parseInt(falString);
+        }
+        values.put(StudentEntry.COLUMN_SUBJECT_FIRST_ADD_LANG, falLang);
+
+        int hssEms = 0;
+        if (!TextUtils.isEmpty(hssString)) {
+            hssEms = parseInt(hssString);
+        }
+        values.put(StudentEntry.COLUMN_SUBJECT_HSS_AND_EMS, hssEms);
+
+        int nsTech = 0;
+        if (!TextUtils.isEmpty(nsString)) {
+            nsTech = parseInt(nsString);
+        }
+        values.put(StudentEntry.COLUMN_SUBJECT_NS_AND_TECH, nsTech);
+
+        int lifeSkills = 0;
+        if (!TextUtils.isEmpty(lifeSkillsString)) {
+            lifeSkills = parseInt(lifeSkillsString);
+        }
+        values.put(StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS, lifeSkills);
+
+
+
+
+
 
         // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not
         if (mCurrentPetUri == null) {
@@ -271,7 +352,7 @@ public class EditorActivity extends AppCompatActivity implements
             case android.R.id.home:
                 // If the pet hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.
-                if (!mPetHasChanged) {
+                if (!mStudentHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditorActivity.this);
                     return true;
                 }
@@ -301,7 +382,7 @@ public class EditorActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         // If the pet hasn't changed, continue with handling back button press
-        if (!mPetHasChanged) {
+        if (!mStudentHasChanged) {
             super.onBackPressed();
             return;
         }
@@ -330,7 +411,12 @@ public class EditorActivity extends AppCompatActivity implements
                 StudentEntry.COLUMN_STUDENT_NAME,
                 StudentEntry.COLUMN_STUDENT_GRADE,
                 StudentEntry.COLUMN_STUDENT_GENDER,
-                StudentEntry.COLUMN_STUDENT_PERCENTAGE };
+                StudentEntry.COLUMN_SUBJECT_MATHEMATICS,
+                StudentEntry.COLUMN_SUBJECT_HOME_LANGUAGE,
+                StudentEntry.COLUMN_SUBJECT_FIRST_ADD_LANG,
+                StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS,
+                StudentEntry.COLUMN_SUBJECT_NS_AND_TECH,
+                StudentEntry.COLUMN_SUBJECT_HSS_AND_EMS};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -355,18 +441,41 @@ public class EditorActivity extends AppCompatActivity implements
             int nameColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_NAME);
             int gradeColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_GRADE);
             int genderColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_GENDER);
-            int weightColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_STUDENT_PERCENTAGE);
+            int mathColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_SUBJECT_MATHEMATICS);
+            int hlColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_SUBJECT_HOME_LANGUAGE);
+            int falColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_SUBJECT_FIRST_ADD_LANG);
+            int nsColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_SUBJECT_NS_AND_TECH);
+            int hssColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_SUBJECT_HSS_AND_EMS);
+            int lifeSkillsColumnIndex = cursor.getColumnIndex(StudentEntry.COLUMN_SUBJECT_LIFE_SKILLS);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             String breed = cursor.getString(gradeColumnIndex);
             int gender = cursor.getInt(genderColumnIndex);
-            int weight = cursor.getInt(weightColumnIndex);
+            int math = cursor.getInt(mathColumnIndex);
+            int hssEms = cursor.getInt(hssColumnIndex);
+            int nsTech = cursor.getInt(nsColumnIndex);
+            int hl = cursor.getInt(hlColumnIndex);
+            int fal = cursor.getInt(falColumnIndex);
+            int lifeSkills = cursor.getInt(lifeSkillsColumnIndex);
+
+            int gradeAverage = (math + hl + hssEms + nsTech + fal + lifeSkills )/6;
+
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
-            mBreedEditText.setText(breed);
-            mWeightEditText.setText(Integer.toString(weight));
+            mGradeEditText.setText("Grade: " + breed);
+            mMathEditText.setText(Integer.toString(math));
+            mHlEditText.setText(Integer.toString(hl));
+            mHssEditText.setText(Integer.toString(hssEms));
+            mMathEditText.setText(Integer.toString(math));
+            mFalEditText.setText(Integer.toString(fal));
+            mNsEditText.setText(Integer.toString(nsTech));
+            mLifeSkillsEditText.setText(Integer.toString(lifeSkills));
+            mGradeAverage.setText(Integer.toString(gradeAverage));
+
+
+
 
             // Gender is a dropdown spinner, so map the constant value from the database
             // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).
@@ -389,8 +498,15 @@ public class EditorActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         // If the loader is invalidated, clear out all the data from the input fields.
         mNameEditText.setText("");
-        mBreedEditText.setText("");
-        mWeightEditText.setText("");
+        mGradeEditText.setText("");
+        mMathEditText.setText("");
+        mHssEditText.setText("");
+        mHlEditText.setText("");
+        mLifeSkillsEditText.setText("");
+        mNsEditText.setText("");
+        mFalEditText.setText("");
+        mGradeAverage.setText("");
+
         mGenderSpinner.setSelection(0); // Select "Unknown" gender
     }
 

@@ -1,23 +1,23 @@
 <resources>
     <!-- Name for the application [CHAR LIMIT=12] -->
 
-    <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
+    <!-- Label for overflow menu option that inserts fake student data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
 
     <!-- Label for overflow menu option that deletes all pet data in the app [CHAR LIMIT=20] -->
-    <string name="action_delete_all_entries">Delete All Pets</string>
+    <string name="action_delete_all_entries">Delete All Students</string>
 
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
     <string name="empty_view_title_text">It\'s a bit lonely here...</string>
 
-    <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
+    <!-- Subtitle text for the empty view that prompts the user to add a student [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a Student</string>
 
-    <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
+    <!-- Title for the activity to add a new student [CHAR LIMIT=20] -->
     <string name="editor_activity_title_new_student">Add a Student</string>
 
     <!-- Title for the activity to edit an existing pet [CHAR LIMIT=20] -->
-    <string name="editor_activity_title_edit_student">Edit Pet</string>
+    <string name="editor_activity_title_edit_student">Edit Student</string>
 
     <!-- Label for editor menu option to save pet and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
@@ -29,13 +29,13 @@
     <string name="editor_insert_student_successful">Student saved</string>
 
     <!-- Toast message in editor when new pet has failed to be inserted [CHAR LIMIT=NONE] -->
-    <string name="editor_insert_student_failed">Error with saving pet</string>
+    <string name="editor_insert_student_failed">Error with saving Student</string>
 
     <!-- Toast message in editor when current pet was successfully updated [CHAR LIMIT=NONE] -->
     <string name="editor_update_student_successful">Student updated</string>
 
     <!-- Toast message in editor when current pet has failed to be updated [CHAR LIMIT=NONE] -->
-    <string name="editor_update_student_failed">Error with updating pet</string>
+    <string name="editor_update_student_failed">Error with updating Student</string>
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
@@ -50,7 +50,7 @@
     <string name="editor_delete_student_successful">Student deleted</string>
 
     <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
-    <string name="editor_delete_Student_failed">Error with deleting pet</string>
+    <string name="editor_delete_Student_failed">Error with deleting student</string>
 
     <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
     <string name="delete_dialog_msg">Delete this Student?</string>
@@ -62,19 +62,26 @@
     <string name="cancel">Cancel</string>
 
     <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
-    <string name="category_overview">Overview</string>
+    <string name="category_overview"> Student Overview</string>
 
     <!-- Label for gender information in the editor [CHAR LIMIT=30] -->
     <string name="category_gender">Gender</string>
 
     <!-- Label for measurement information in the editor [CHAR LIMIT=30] -->
-    <string name="category_percentage">Percentage</string>
+    <string name="category_percentage">PERCENTAGES</string>
 
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_student_name">Name</string>
 
     <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
     <string name="hint_student_grade">Grade</string>
+
+    <string name="hint_mathematics_perc"> Mathematics Percent</string>
+    <string name="hint_hl_perc"> Home Lang Percent</string>
+    <string name="hint_fal_perc"> First Add Lang Percent</string>
+    <string name="hint_life_skills_perc"> Life Skills Percent</string>
+    <string name="hint_ns_tech_perc"> NS and Tech Percent</string>
+    <string name="hint_hss_ems_perc"> HSS and EMS Percent</string>
 
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="unit_student_percentage">%</string>
@@ -94,5 +101,31 @@
     <!-- Label for the pet's breed if the breed is unknown [CHAR LIMIT=20] -->
     <string name="unknown_grade">Unknown Grade</string>
 
-    <string name="app_name">Report Card</string>
+    <string name="view_report">Report Card</string>
+
+    <string name="mathematics">Mathematics</string>
+    <string name="home_language">Home Language</string>
+    <string name="first_add_language">First Additional Language</string>
+    <string name="life_skills">Life Skills</string>
+    <string name="hss_ems">HSS and EMS</string>
+    <string name="ns_tech">NS and Tech</string>
+    <string name="subject_categories">SUBJECT CATEGORIES</string>
+    <string name="grade_average">GRADE AVERAGE</string>
+    <string name="report_card">Report Cards</string>
+
+    <string name="app_name">Student Report Cards</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>
