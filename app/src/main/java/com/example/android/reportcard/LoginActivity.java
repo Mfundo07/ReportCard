@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+    private static final String EMAIL_KEY = "email_key";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -183,6 +184,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // form field with an error.
             focusView.requestFocus();
         } else {
+            getIntent().putExtra(EMAIL_KEY, email);
+            setResult(RESULT_OK,getIntent());
+            finish();
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
